@@ -42,3 +42,19 @@ python -m pip install --upgrade pip
 ```
 pip install -r requirements.txt
 ```
+
+## Эндпоинты
+
+- POST `/api/webhook/bank/` — приём webhook от банка
+- GET `/api/organizations/<inn>/balance/` — текущий баланс по ИНН
+
+## Пример запроса
+
+```json
+{
+  "operation_id": "ccf0a86d-041b-4991-bcf7-e2352f7b8a4a",
+  "amount": 145000,
+  "payer_inn": "1234567890",
+  "document_number": "PAY-328",
+  "document_date": "2024-04-27T21:00:00Z"
+}
