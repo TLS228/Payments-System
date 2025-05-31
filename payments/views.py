@@ -10,7 +10,8 @@ class BankWebhookView(APIView):
     def post(self, request):
         serializer = BankWebhookSerializer(data=request.data)
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
 
         created = process_payment(serializer.validated_data)
 

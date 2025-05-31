@@ -9,7 +9,7 @@ def process_payment(data):
     operation_id = data["operation_id"]
 
     if Payment.objects.filter(operation_id=operation_id).exists():
-        return False  # дубликат
+        return False
 
     with transaction.atomic():
         payment = Payment.objects.create(**data)
@@ -21,6 +21,9 @@ def process_payment(data):
         BalanceLog.objects.create(organization=org, amount=payment.amount)
 
         logger.info(
-            f"[Balance Update] INN {org.inn}: +{payment.amount}, New balance: {org.balance}"
+            (
+                f"[Balance Update] INN {org.inn}: +{payment.amount}, "
+                f"New balance: {org.balance}"
+            )
         )
         return True
